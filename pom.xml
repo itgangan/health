@@ -1,0 +1,292 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.health</groupId>
+  <artifactId>health</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>health Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+
+    <!-- =========================spring======================== -->
+    <!-- spring-webmvc会主动去依赖spring-web,spring-context,core,bean,aop,expression等 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>4.3.10.RELEASE</version>
+    </dependency>
+
+    <!-- spring jdbc -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>4.3.10.RELEASE</version>
+    </dependency>
+
+    <!-- spring test -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>4.3.12.RELEASE</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- spring aspects -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+      <version>4.3.10.RELEASE</version>
+    </dependency>
+
+    <!-- spring-data-jpa -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>2.0.7.RELEASE</version>
+    </dependency>
+
+    <!-- spring orm -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>4.3.10.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>3.2.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+    <!-- =========================数据存储======================== -->
+    <!-- mongodb -->
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+
+    <!-- mysql -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.43</version>
+    </dependency>
+
+    <!-- hibernate -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.2.16.Final</version>
+    </dependency>
+
+    <!-- mybatis -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.4.6</version>
+    </dependency>
+
+    <!-- redis -->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.8.1</version>
+    </dependency>
+
+    <!-- =========================工具包======================== -->
+
+    <!-- commons-lang -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.5</version>
+    </dependency>
+
+    <!-- google-guava -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>19.0</version>
+    </dependency>
+
+    <!-- json -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.13</version>
+    </dependency>
+
+    <!-- dom4j -->
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>1.6.1</version>
+    </dependency>
+
+    <!-- =========================其它======================== -->
+
+    <!-- logs -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.21</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-dbcp</artifactId>
+      <version>8.5.30</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+
+
+  </dependencies>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <resources>src/main/resources/</resources>
+    <project.build.outputDirectory>target</project.build.outputDirectory>
+  </properties>
+
+
+  <build>
+    <plugins>
+      <!-- 编译插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <!-- 依赖插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- 打jar包插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>  <!-- 在jar包中增加依赖jar路径说明 -->
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>com.garfield.gui.Main</mainClass>
+            </manifest>
+            <!-- 用maven在MANIFEST.MF资料中的Class-Path中增加当前目录(.) -->
+            <manifestEntries>
+              <Class-Path>.</Class-Path>
+            </manifestEntries>
+
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <resources>
+      <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+
+      <!-- 设置对auto-config.properties，jdbc.properties进行过虑，即这些文件中的${key}会被替换掉为真正的值 -->
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>${resources}config.properties</include>
+          <include>jdbc.properties</include>
+          <include>mongo.properties</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <finalName>ssm</finalName>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <!-- 默认激活开发配制，使用config-dev.properties来替换设置过虑的资源文件中的${key} -->
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <filters>
+          <filter>${resources}config.properties</filter>
+        </filters>
+      </build>
+    </profile>
+    <profile>
+      <id>test</id>
+      <build>
+        <filters>
+          <filter>config-test.properties</filter>
+        </filters>
+      </build>
+    </profile>
+    <profile>
+      <id>product</id>
+      <build>
+        <filters>
+          <filter>config-product.properties</filter>
+        </filters>
+      </build>
+    </profile>
+  </profiles>
+
+
+
+</project>
+
