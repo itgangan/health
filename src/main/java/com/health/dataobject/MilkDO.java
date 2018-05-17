@@ -11,8 +11,11 @@ public class MilkDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name="volume")
     private Integer volume; // 量(毫升)
+    @Column(name ="gmt_create")
     private Date gmtCreate; // 创建时间
+    @Column(name="gmt_modified")
     private Date gmtModified; // 最新修改时间
 
     public Long getId() {

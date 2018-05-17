@@ -3,18 +3,20 @@ package com.health.controller;
 import com.health.bo.MilkBO;
 import com.health.service.MilkService;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.Date;
 
-@Controller
+@Named
 public class MilkController {
 
     @Inject
-    private Logger logger;
+    private static Logger logger;
 
     @Inject
     private MilkService milkService;
@@ -26,5 +28,7 @@ public class MilkController {
         milk.setVolume(volume);
         milk.setGmtCreate(new Date());
         milkService.saveMilk(milk);
+
+        logger.info("test logger inject");
     }
 }

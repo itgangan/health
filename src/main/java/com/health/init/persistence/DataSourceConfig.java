@@ -11,7 +11,7 @@ public class DataSourceConfig {
     public BasicDataSource dataSource(){
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/health?useUnicode=true&amp;characterEncoding=UTF-8");
+        ds.setUrl("jdbc:mysql://10.68.40.31:3306/health?useUnicode=true&amp;characterEncoding=UTF-8");
         ds.setUsername("root");
         ds.setPassword("");
 

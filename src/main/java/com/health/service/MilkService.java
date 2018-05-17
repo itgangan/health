@@ -1,13 +1,13 @@
 package com.health.service;
 
 import com.health.bo.MilkBO;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Named;
 
 /**
  * 喂奶相关的业务
  */
-@Named
 public interface MilkService {
 
     /**

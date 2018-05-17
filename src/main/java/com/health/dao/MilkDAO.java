@@ -2,13 +2,16 @@ package com.health.dao;
 
 import com.health.dataobject.MilkDO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import javax.inject.Named;
 import java.util.Date;
 import java.util.List;
 
 /**
  * 喂奶记录DAO接口
  */
+@Named
 public interface MilkDAO extends JpaRepository<MilkDO, Long> {
 
     /**
@@ -25,7 +28,7 @@ public interface MilkDAO extends JpaRepository<MilkDO, Long> {
      * @param milkDO 要更新喂奶记录
      * @return
      */
-    MilkDO update(MilkDO milkDO);
+//    MilkDO update(MilkDO milkDO);
 
     /**
      * 插入一条喂奶记录
