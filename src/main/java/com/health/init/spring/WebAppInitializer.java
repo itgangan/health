@@ -28,21 +28,21 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected Class<?>[] getRootConfigClasses() {
         // 返回带有@Configuration注解的类将会用来配置ContextLoaderListener创建的应用上下文中的bean
-        return new Class<?>[]{RootConfig.class};
+        return new Class<?>[]{RootConfig.class, AspectConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
         // 返回带有@Configuration注解的类将会用来定义DispatcherServlet应用上下文中的bean
         // 注意：这里的AspectConfig.class必须放在这里，只有放在DispatcherServlet应用上下文中，对Controller的切入才能生效，要不然AspectConfig找不到Controller
-        return new Class<?>[]{ServletConfig.class, AspectConfig.class};
+        return new Class<?>[]{ServletConfig.class};
     }
 
     @Override
     protected void customizeRegistration(Dynamic registration) {
-//		registration.setMultipartConfig(new MultipartConfigElement(SystemConstans.UPLOAD_TEMP));
+		registration.setMultipartConfig(new MultipartConfigElement(SystemConstans.UPLOAD_TEMP));
         registration.setLoadOnStartup(1);
-        // registration.setInitParameter("name", "value");
+        registration.setInitParameter("name", "value");
     }
 
     @Override

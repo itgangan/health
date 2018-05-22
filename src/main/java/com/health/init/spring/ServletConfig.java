@@ -3,16 +3,21 @@ package com.health.init.spring;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import javax.inject.Named;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.health.controller")
-public class ServletConfig extends WebMvcConfigurerAdapter {
+public class ServletConfig implements WebMvcConfigurer {
 
     // 配置jsp视图解析器
     @Bean
@@ -23,6 +28,7 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
         resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
     }
+
 
     // 配置静态资源处理器
     @Override

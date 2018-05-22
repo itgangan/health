@@ -24,7 +24,7 @@ import java.util.List;
 public class StastisticsServiceImpl implements StastisticsService {
 
     @Inject
-    private static Logger logger;
+    private Logger logger;
 
     @Inject
     private StatisticsDAO statisticsDao;

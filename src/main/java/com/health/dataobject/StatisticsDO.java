@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name="statistics")

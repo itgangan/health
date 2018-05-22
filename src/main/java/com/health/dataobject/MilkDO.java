@@ -3,7 +3,7 @@ package com.health.dataobject;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name="milk")
@@ -14,7 +14,7 @@ public class MilkDO {
     @Column(name="volume")
     private Integer volume; // 量(毫升)
     @Column(name ="gmt_create")
-    private Date gmtCreate; // 创建时间
+    private java.util.Date gmtCreate; // 创建时间
     @Column(name="gmt_modified")
     private Date gmtModified; // 最新修改时间
 

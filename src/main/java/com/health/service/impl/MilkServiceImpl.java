@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import java.util.Date;
 
 @Named
 @Transactional
@@ -24,6 +25,7 @@ public class MilkServiceImpl implements MilkService {
     @Override
     public void saveMilk(MilkBO milkBO) {
         MilkDO milkDO = new MilkDO();
+        milkDO.setGmtModified(new Date());
         BeanUtils.copyProperties(milkBO, milkDO);
         milkDao.save(milkDO);
     }

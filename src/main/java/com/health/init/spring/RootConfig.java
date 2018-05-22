@@ -9,7 +9,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = {"com.health"}, excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)})
+@ComponentScan(basePackages = {"com.health"}, excludeFilters = {
+        @Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class),
+        @Filter(type = FilterType.ANNOTATION, value = EnableAspectJAutoProxy.class)
+})
 public class RootConfig {
 
+    @Bean
+    @Scope("prototype")
+    Logger logger(InjectionPoint injectionPoint) {
+        return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
+    }
 }

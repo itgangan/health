@@ -23,14 +23,6 @@ public interface MilkDAO extends JpaRepository<MilkDO, Long> {
     MilkDO findById(long id);
 
     /**
-     * 更新Milk
-     *
-     * @param milkDO 要更新喂奶记录
-     * @return
-     */
-//    MilkDO update(MilkDO milkDO);
-
-    /**
      * 插入一条喂奶记录
      *
      * @param maikDO 喂奶记录
