@@ -2,18 +2,19 @@ package com.health.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
-import org.aspectj.lang.reflect.MethodSignature;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Aspect
 @Component
 public class LogControllerAspect extends LogAspect {
 
-     private static final Logger logger = LoggerFactory.getLogger(LogControllerAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(LogControllerAspect.class);
 
     /**
      * 切点

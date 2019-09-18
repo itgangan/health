@@ -2,19 +2,11 @@ package com.health.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.List;
 
 public class LogAspect {
-     private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
     /**
      * 环绕切面，功能为打印方法的入参，执行时间，还回结果，同时将运行时异常封装SaeException并抛出
@@ -34,7 +26,8 @@ public class LogAspect {
         Object obj = joinPoint.proceed(args);
         long endTime = System.currentTimeMillis();
 
-        logger.info("{}.{} end with:{} cost:{} mills. result:{}", className, methodName, args, (endTime - startTime), obj);
+        logger.info("{}.{} end with:{} cost:{} mills. result:{}", className, methodName, args, (endTime - startTime),
+                obj);
         return obj;
 
     }
