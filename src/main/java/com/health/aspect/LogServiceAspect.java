@@ -13,23 +13,10 @@ public class LogServiceAspect extends LogAspect {
     private void service() {
     }
 
-//    @Before("service()")
-//    public void before(JoinPoint joinPoint) {
-//        logBefore(joinPoint);
-//    }
-
-//    @AfterReturning(value = "service()", returning = "result")
-//    public void afterReturning(JoinPoint joinPoint, Object result) {
-//        logAfterReturning(joinPoint, result);
-//    }
-
     @Around(value = "service()")
     public void around(ProceedingJoinPoint joinPoint) {
         logAround(joinPoint);
     }
 
-    @AfterThrowing(value = "service()", throwing = "exception")
-    public void afterThrowing(JoinPoint joinPoint, ArithmeticException exception) {
-        logAfterThrowing(joinPoint, exception);
-    }
+   
 }
