@@ -14,61 +14,42 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LogAspect {
-    private static final Logger logger = LoggerFactory.getLogger("accessLog");
+     private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
-    void logBefore(JoinPoint joinPoint) {
+    /**
+     * 环绕切面，功能为打印方法的入参，执行时间，还回结果，同时将运行时异常封装SaeException并抛出
+     *
+     * @param joinPoint
+     * @return
+     * @throws Throwable
+     */
+    Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = joinPoint.getSignature().getName();
-        List<Object> args = Arrays.asList(joinPoint.getArgs());
-
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-
-        logger.info("session:{} {}.{} begins with:{}", new Object[]{session.getId(), className, methodName, args});
-    }
-
-    void logAfterReturning(JoinPoint joinPoint, Object result) {
-        String className = joinPoint.getTarget().getClass().getName();
-        String methodName = joinPoint.getSignature().getName();
-        List<Object> args = Arrays.asList(joinPoint.getArgs());
-
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-
-        logger.info("session:{} {}.{} end with:{} result:{}", new Object[]{session.getId(), className, methodName, args, result});
-    }
-
-    Object logAround(ProceedingJoinPoint joinPoint) {
-        String className = joinPoint.getTarget().getClass().getName();
-        String methodName = joinPoint.getSignature().getName();
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
         Object[] args = joinPoint.getArgs();
 
-        logger.info("session:{} {}.{} begins with:{}", new Object[]{session.getId(), className, methodName, args});
+        logger.info("{}.{} begin with:{}", className, methodName, args);
 
-        Object obj = null;
         long startTime = System.currentTimeMillis();
-
-        try {
-            obj = joinPoint.proceed(args);
-        } catch (Throwable e) {
-            throw new RuntimeException(e);
-        }
-
+        Object obj = joinPoint.proceed(args);
         long endTime = System.currentTimeMillis();
 
-        logger.info("session:{} {}.{} end with:{} cost:{} mills. result:{}", new Object[]{session.getId(), className, methodName, args, (endTime - startTime), obj});
+        logger.info("{}.{} end with:{} cost:{} mills. result:{}", className, methodName, args, (endTime - startTime), obj);
         return obj;
+
     }
 
-    void logAfterThrowing(JoinPoint joinPoint, ArithmeticException exception) {
+    /**
+     * 当抛异常之后的处理逻辑
+     *
+     * @param joinPoint
+     * @param ex
+     */
+    void logAfterThrowing(JoinPoint joinPoint, Exception ex) {
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = joinPoint.getSignature().getName();
-
-        logger.error("Exception in {} {}, e:{}", new Object[]{className, methodName, exception});
-        logger.error("Exception ", exception);
+        Object[] args = joinPoint.getArgs();
+        logger.error("Exception in {}.{}({})", className, methodName, args, ex);
     }
 
 
