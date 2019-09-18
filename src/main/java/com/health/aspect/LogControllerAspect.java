@@ -18,7 +18,7 @@ public class LogControllerAspect extends LogAspect {
     /**
      * 切点
      */
-    @Pointcut("execution(* com.travelsky.controller.*.*(..))")
+    @Pointcut("execution(* com.health.controller.*.*(..))")
     private void controller() {
     }
 
