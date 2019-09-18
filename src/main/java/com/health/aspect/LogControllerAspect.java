@@ -13,27 +13,45 @@ import java.util.List;
 @Component
 public class LogControllerAspect extends LogAspect {
 
-    @Pointcut("execution(* com.health.controller.*.*(..))")
+     private static final Logger logger = LoggerFactory.getLogger(LogControllerAspect.class);
+
+    /**
+     * 切点
+     */
+    @Pointcut("execution(* com.travelsky.controller.*.*(..))")
     private void controller() {
     }
 
-//    @Before("controller()")
-//    public void before(JoinPoint joinPoint) {
-//        logBefore(joinPoint);
-//    }
-
-//    @AfterReturning(value = "controller()", returning = "result")
-//    public void afterReturning(JoinPoint joinPoint, Object result) {
-//        logAfterReturning(joinPoint, result);
-//    }
-
+    /**
+     * 通知，统一处理异常
+     *
+     * @param joinPoint
+     * @return
+     * @throws Throwable
+     */
     @Around(value = "controller()")
-    public void around(ProceedingJoinPoint joinPoint) {
-        logAround(joinPoint);
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+        Object obj = null;
+        try {
+            obj = logAround(joinPoint);
+        } catch (Exception throwable) {
+            logger.error("exception ", throwable);
+            // 这里应该捕获特定的异常并处理
+            throw throwable;
+        }
+
+        return obj;
+
     }
 
+    /**
+     * 当抛出异常后的处理逻辑
+     *
+     * @param joinPoint
+     * @param exception
+     */
     @AfterThrowing(value = "controller()", throwing = "exception")
-    public void afterThrowing(JoinPoint joinPoint, ArithmeticException exception) {
+    public void afterThrowing(JoinPoint joinPoint, Exception exception) {
         logAfterThrowing(joinPoint, exception);
     }
 
